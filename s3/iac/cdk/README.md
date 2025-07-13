@@ -23,4 +23,6 @@ cdk init sample-app --language=typescript
 ```
 cdk bootstrap
 cdk deploy
+cdk synth
+cdk destroy
 ```
