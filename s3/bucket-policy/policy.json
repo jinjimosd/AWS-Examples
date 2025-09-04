@@ -1,0 +1,33 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyPutObjectWithoutDepartmentTag",
+      "Effect": "Deny",
+      "Principal": {
+        "AWS": "arn:aws:iam::279863352558:user/adam"
+      },
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::bucket-policy-fun-abc-1245/*",
+      "Condition": {
+        "StringNotEquals": {
+          "s3:RequestObjectTag/Department": "ancestor"
+        }
+      }
+    },
+    {
+      "Sid": "AllowPutWithCorrectTag",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::279863352558:user/adam"
+      },
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::bucket-policy-fun-abc-1245/*",
+      "Condition": {
+        "StringEquals": {
+          "s3:RequestObjectTag/Department": "ancestor"
+        }
+      }
+    }
+  ]
+}
