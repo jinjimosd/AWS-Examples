@@ -1,5 +1,5 @@
 - Install ruby
-```
+```sh
 ruby --version
 bundle init
 bundle install 

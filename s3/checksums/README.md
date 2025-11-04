@@ -1,32 +1,32 @@
 ## Create a new s3 bucket
-```
+```sh
 aws s3 mb s3://checksums-example-ab-2345
 ```
 
 ## Create a file that will we do a checksum on
-```
+```sh
 echo "Hello Mars" > myfile.txt
 ```
 
 ## Get a checksum of a file for md5
-```
+```sh
 md5sum myfile.txt
 8ed2d86f12620cdba4c976ff6651637f  myfile.txt
 ```
 
 ## Upload our file and look at its etag
-```
+```sh
 aws s3 cp myfile.txt s3://checksums-example-ab-2345
 aws s3api head-object --bucket checksums-example-ab-2345 --key myfile.txt
 ```
 
 ## Generate a Custom Checksum
-```
+```sh
 CHECKSUM_SHA1=$(openssl dgst -sha1 -binary myfile.txt | base64)
 ```
 
 ## Upload File with Custom Checksum
-```
+```sh
 aws s3api put-object \
     --bucket="checksums-example-ab-2345" \
     --key="myfilesha1.txt" \

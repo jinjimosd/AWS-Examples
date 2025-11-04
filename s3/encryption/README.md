@@ -1,16 +1,16 @@
 ## Create a bucket
-```
+```sh
 aws s3 mb s3://encryption-fun-ab-112
 ```
 
 ## Create a file and Put object with encryption SSE-S3
-```
+```sh
 echo "Hello World" > hello.txt
 aws s3 cp hello.txt s3://encryption-fun-ab-112
 ```
 
 ## Put object with encryption of SSE-KMS
-```
+```sh
 aws s3api put-object \
 --bucket encryption-fun-ab-112 \
 --key hello.txt \
@@ -20,7 +20,7 @@ aws s3api put-object \
 ```
 
 ## Put Object with SSE-C [Failed Attempt]
-```
+```sh
 export BASE_ENCODED_KEY=$(openssl rand -base64 32)
 echo $BASE_ENCODED_KEY
 
@@ -41,7 +41,7 @@ An error occurred (InvalidArgument) when calling the PutObject operation: The ca
 ## Put Object with SSE-C via aws s3api
 Link: https://www.scaleway.com/en/docs/object-storage/api-cli/enable-sse-c/
 
-```
+```sh
 openssl rand -out ssec.key 32
 export BASE_ENCODED_KEY=$(cat ssec.key | base64)
 export MD5_VALUE=$(openssl dgst -md5 -binary ssec.key | base64)
@@ -66,7 +66,7 @@ hello.txt \
 ## Put object with SSE-C via aws S3
 Link: https://catalog.us-east-1.prod.workshops.aws/workshops/aad9ff1e-b607-45bc-893f-121ea5224f24/en-US/s3/serverside/ssec
 
-```
+```sh
 openssl rand -out ssec.key 32
 aws s3 cp hello.txt s3://encryption-fun-ab-112/hello.txt \
 --sse-c AES256 \
@@ -78,7 +78,7 @@ aws s3 cp s3://encryption-fun-ab-112/hello.txt hello.txt \
 ```
 
 ## Clean
-```
+```sh
 aws s3 rm s3://encryption-fun-ab-112 --recursive
 aws s3 rb s3://encryption-fun-ab-112
 rm ssec.key

@@ -1,7 +1,7 @@
 # Step
 - Install aws cli, create access token with admin access for learning
 - Run
-```
+```sh
 ./create_bucket.sh bucket_name bucket_region
 ./delete_bucket.sh bucket_name
 ./delete_object.sh bucket_name
